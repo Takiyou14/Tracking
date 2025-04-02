@@ -67,4 +67,24 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasVerifiedEmail() || true;
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isEmployee()
+    {
+        return $this->role === 'employee';
+    }
+
+    public function isTraveler()
+    {
+        return $this->role === 'traveler';
+    }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
+    }
 }
