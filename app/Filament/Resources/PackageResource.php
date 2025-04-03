@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PackageResource extends Resource
 {
@@ -81,7 +82,42 @@ class PackageResource extends Resource
                 Tables\Actions\Action::make('generateQrCode')
                     ->icon('heroicon-o-qr-code')
                     ->label('Qr Code')
-                    ->color('success'),
+                    ->color('success')
+                    ->modalHeading(false)
+                    ->modalSubmitAction(false)
+                    ->modalCancelAction(false)
+                    ->modalWidth('lg')
+                    ->extraModalWindowAttributes([
+                        'style' => 'background:white; color:black',
+                    ])
+                    ->modalContent(function ($record) {
+                        $text = url('scan/' . $record->id);
+                        $qrCode = QrCode::size(256)->generate($text);
+
+                        return view('qrcode', [
+                            'uuid' => $record->id,
+                            'qrCode' => $qrCode,
+                        ]);
+                    })
+                    ->extraModalFooterActions([
+                        Tables\Actions\Action::make('donwload')
+                            ->extraAttributes([
+                                'style' => '
+                                    background-color: black;
+                                    margin: 0 auto;
+                                    padding: 0.5rem 1.5rem;
+                                    border-radius: 0.25rem;
+                                '
+                            ])
+                            ->action(function ($record) {
+                                $text = url('scan/' . $record->id);
+                                $qrCode = QrCode::size(300)->generate($text);
+
+                                return response()->streamDownload(function () use ($qrCode) {
+                                    echo $qrCode;
+                                }, 'package-' . $record->id . '.svg');
+                            }),
+                    ]),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
