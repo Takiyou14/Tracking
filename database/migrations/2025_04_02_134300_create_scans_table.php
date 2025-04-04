@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->foreignUuid('package_id')->constrained('packages')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('status', ['registered', 'taken', 'security_checked', 'loaded', 'arrived']);
+            $table->unique(['package_id', 'status']);
             $table->timestamps();
         });
     }

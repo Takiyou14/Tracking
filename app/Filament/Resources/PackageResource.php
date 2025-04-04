@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
+use App\Filament\Resources\PackageResource\RelationManagers\ScansRelationManager;
 use App\Models\Package;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -11,7 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PackageResource extends Resource
@@ -51,7 +51,7 @@ class PackageResource extends Resource
                     ->label('Tracking Code')
                     ->copyable()
                     ->extraAttributes([
-                        'class' => 'font-mono text-sm' // Monospace font
+                        'class' => 'font-mono text-sm'
                     ])
                     ->icon('heroicon-o-document-duplicate')
                     ->iconPosition('after'),
@@ -127,7 +127,7 @@ class PackageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ScansRelationManager::class,
         ];
     }
 
@@ -149,5 +149,10 @@ class PackageResource extends Resource
         }
 
         return $query->where('user_id', auth()->id());
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isAdmin() || auth()->user()->isTraveler();
     }
 }

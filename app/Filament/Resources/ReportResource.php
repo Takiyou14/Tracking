@@ -83,7 +83,6 @@ class ReportResource extends Resource
         return [
             'index' => Pages\ListReports::route('/'),
             'create' => Pages\CreateReport::route('/create'),
-            'edit' => Pages\EditReport::route('/{record}/edit'),
         ];
     }
 
@@ -96,5 +95,10 @@ class ReportResource extends Resource
         }
 
         return $query->where('user_id', auth()->id());
+    }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->isAdmin() || auth()->user()->isTraveler();
     }
 }
