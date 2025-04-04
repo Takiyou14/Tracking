@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Package;
+use App\Models\Scan;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
@@ -48,9 +48,14 @@ class TrackPackage extends Component implements HasForms
         $trackingNumber = $this->data['number'];
 
         if (!empty($trackingNumber) || uuid_is_valid($trackingNumber)) {
-            $package = Package::find($trackingNumber);
-            if ($package) {
-                $this->dispatch('tracking-processed', $package);
+            $scans = Scan::where('package_id', $trackingNumber)->get(['status', 'created_at'])->map(function ($scan) {
+                return [
+                    'status' => ucwords(str_replace('_', ' ', $scan->status)),
+                    'time_ago' => $scan->created_at->diffForHumans(),
+                ];
+            });
+            if ($scans->isNotEmpty()) {
+                $this->dispatch('tracking-processed', $scans, $trackingNumber);
                 $this->dispatch('update-url', url: "/?data=" . urlencode($trackingNumber));
                 return;
             }

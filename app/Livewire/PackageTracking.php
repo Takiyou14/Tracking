@@ -6,15 +6,15 @@ use Livewire\Component;
 
 class PackageTracking extends Component
 {
-    public $processedData = '';
+    public array $processedData = [];
+    public string $trackingNumber;
 
     protected $listeners = ['tracking-processed' => 'updateProcessedData'];
 
-    public function updateProcessedData($data)
+    public function updateProcessedData($data, $track)
     {
-        $status = $data['status'];
-
-        $this->processedData = $status;
+        $this->trackingNumber = $track;
+        $this->processedData = $data;
     }
 
     public function render()
