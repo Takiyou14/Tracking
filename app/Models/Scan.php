@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Scan extends Model
 {
     protected $fillable = [
-        'description',
+        'package_id',
         'user_id',
         'status',
     ];
