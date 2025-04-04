@@ -24,4 +24,9 @@ class Package extends Model
     {
         return $this->hasMany(Scan::class);
     }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
 }

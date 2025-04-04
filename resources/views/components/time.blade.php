@@ -6,8 +6,8 @@
                 clip-rule="evenodd" />
         </svg>
     </span>
-    <h3 class="flex items-center mb-1 text-lg font-semibold">
-        <span class="bg-amber-100 text-amber-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm ms-3">
+    <h3 class="flex items-center mb-1 text-lg">
+        <span class="bg-amber-100 text-amber-800 text-sm font-semibold me-2 px-2.5 py-0.5 rounded-sm ms-3">
             {{ $text }}
         </span>
     </h3>

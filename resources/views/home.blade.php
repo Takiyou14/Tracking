@@ -23,7 +23,7 @@
 </head>
 
 
-<body class="bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<body class="bg-[#0a0a0a] font-mono text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
     <header wire:ignore class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
         <nav class="flex items-center justify-center gap-4">
             @auth
@@ -50,7 +50,7 @@
         class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row-reverse">
             <div
-                class="bg-[#FFFFFF70] bg-gray-600 lg:-ms-px -mb-px lg:mb-0 rounded-b-lg lg:rounded-bl-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
+                class="bg-gray-600 flex flex-col justify-around items-center lg:-ms-px -mb-px lg:mb-0 rounded-b-lg lg:rounded-bl-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden shadow-[inset_0px_0px_0px_1px_#fffaed2d]">
                 @livewire('package-tracking')
             </div>
             <div wire:ignore.self
