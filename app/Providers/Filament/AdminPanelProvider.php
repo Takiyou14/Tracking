@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile(EditProfile::class, isSimple: false)
             ->brandName("Tracking System")
             ->spa()
+            ->databaseNotifications()
             ->colors([
                 'primary' => Color::Blue,
             ])

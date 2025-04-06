@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Package;
 use App\Models\Scan;
+use Filament\Notifications\Notification;
 
 class ScanObserver
 {
@@ -12,6 +13,14 @@ class ScanObserver
      */
     public function created(Scan $scan): void
     {
+        $user = $scan->package->user;
+        Notification::make()
+            ->title('You package has been ' . $scan->status)
+            ->success()
+            ->sendToDatabase($user);
+        if ($scan->status === 'arrived') {
+            $user->notify(new \App\Notifications\PackageArrived($scan->package_id));
+        }
         if ($scan->status === 'registered') {
             return;
         }
