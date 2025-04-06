@@ -13,22 +13,22 @@ class ScanSeeder extends Seeder
      */
     public function run(): void
     {
-        Scan::create([
-            'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
-            'user_id' => 2,
-            'status' => 'registered',
-        ]);
+        // Scan::create([
+        //     'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
+        //     'user_id' => 2,
+        //     'status' => 'registered',
+        // ]);
 
-        Scan::create([
-            'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
-            'user_id' => 2,
-            'status' => 'taken',
-        ]);
+        // Scan::create([
+        //     'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
+        //     'user_id' => 2,
+        //     'status' => 'taken',
+        // ]);
 
-        Scan::create([
-            'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
-            'user_id' => 2,
-            'status' => 'security_checked',
-        ]);
+        // Scan::create([
+        //     'package_id' => '0195f949-8211-7154-9740-0bbb8c6e2f4d',
+        //     'user_id' => 2,
+        //     'status' => 'security_checked',
+        // ]);
     }
 }

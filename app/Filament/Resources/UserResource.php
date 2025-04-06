@@ -38,10 +38,13 @@ class UserResource extends Resource
                     ->required()
                     ->options([
                         'admin' => 'Admin',
-                        'employee' => 'Employee',
+                        'taker' => 'Taker',
+                        'security' => 'Security',
+                        'loader' => 'Loader',
+                        'arriver' => 'Arriver',
                         'traveler' => 'Traveler',
                     ])
-                    ->default('employee')
+                    ->default('taker')
                     ->native(false),
                 Forms\Components\TextInput::make('password')
                     ->password()
@@ -65,8 +68,8 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
+                        '*' => 'warning',
                         'admin' => 'success',
-                        'employee' => 'warning',
                         'traveler' => 'gray',
                     }),
                 Tables\Columns\IconColumn::make('email_verified_at')
@@ -91,7 +94,10 @@ class UserResource extends Resource
                     ->multiple()
                     ->options([
                         'admin' => 'Admin',
-                        'employee' => 'Employee',
+                        'taker' => 'Taker',
+                        'security' => 'Security',
+                        'loader' => 'Loader',
+                        'arriver' => 'Arriver',
                         'traveler' => 'Traveler',
                     ]),
             ])

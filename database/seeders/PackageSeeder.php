@@ -13,9 +13,11 @@ class PackageSeeder extends Seeder
      */
     public function run(): void
     {
-        Package::create([
-            'user_id' => 2,
-            'description' => 'Test Luggage',
-        ]);
+        for ($i = 1; $i <= 10; $i++) {
+            Package::create([
+                'user_id' => 6,
+                'description' => 'Package ' . $i,
+            ]);
+        }
     }
 }

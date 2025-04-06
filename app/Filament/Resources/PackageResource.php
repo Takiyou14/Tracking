@@ -91,7 +91,7 @@ class PackageResource extends Resource
                         'style' => 'background:white; color:black',
                     ])
                     ->modalContent(function ($record) {
-                        $text = url('scan/' . $record->id);
+                        $text = route('filament.dashboard.resources.scans.create', ['id' => $record->id]);
                         $qrCode = QrCode::size(256)->generate($text);
 
                         return view('qrcode', [
@@ -110,7 +110,7 @@ class PackageResource extends Resource
                                 '
                             ])
                             ->action(function ($record) {
-                                $text = url('scan/' . $record->id);
+                                $text = route('filament.dashboard.resources.scans.create', ['id' => $record->id]);
                                 $qrCode = QrCode::size(300)->generate($text);
 
                                 return response()->streamDownload(function () use ($qrCode) {

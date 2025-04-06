@@ -75,7 +75,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function isEmployee()
     {
-        return $this->role === 'employee';
+        $roles = ['taker', 'security', 'loader', 'arriver'];
+        return in_array($this->role, $roles);
     }
 
     public function isTraveler()

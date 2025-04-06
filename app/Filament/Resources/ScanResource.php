@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ScanResource extends Resource
@@ -80,8 +81,34 @@ class ScanResource extends Resource
         ];
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (auth()->user()->isAdmin()) {
+            return $query;
+        }
+
+        return $query->where('user_id', auth()->id());
+    }
+
     public static function canAccess(): bool
     {
         return auth()->user()->isAdmin() || auth()->user()->isEmployee();
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()->isEmployee();
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()->isAdmin();
     }
 }
