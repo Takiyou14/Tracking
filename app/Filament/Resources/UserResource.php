@@ -68,7 +68,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('role')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
-                        '*' => 'warning',
+                        default => 'warning',
                         'admin' => 'success',
                         'traveler' => 'gray',
                     }),

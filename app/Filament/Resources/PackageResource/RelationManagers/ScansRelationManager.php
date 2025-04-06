@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ScansRelationManager extends RelationManager
@@ -53,5 +54,20 @@ class ScansRelationManager extends RelationManager
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ]);
+    }
+
+    protected function canCreate(): bool
+    {
+        return auth()->user()->isAdmin();
+    }
+
+    protected function canDelete(Model $record): bool
+    {
+        return auth()->user()->isAdmin();
+    }
+
+    protected function canEdit(Model $record): bool
+    {
+        return auth()->user()->isAdmin();
     }
 }
